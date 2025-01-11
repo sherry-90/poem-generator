@@ -1,23 +1,24 @@
-function displayRecipe(response) {
-  new Typewriter("#recipe", {
+function displayPoem(response) {
+  new Typewriter("#poem", {
     strings: response.data.answer,
     autoStart: true,
-    delay: 20,
+    delay: 1,
     cursor: "",
   });
 }
 
-function generateRecipe(event) {
+function generatePoem(event) {
   event.preventDefault();
 
-  let instructionInput = document.querySelector("#user-instruction");
+  let instructionsInput = document.querySelector("#user-instructions");
   let apiKey = "690636a01a7b230fate74f93o05741f4";
   let context =
-    "you are a great chef and love to write short recipes. your mission is to generate  a 4 line recipe in basic html and separate each line with a <br />. make sure to follow the user instruction.sign the recipe with`Shecodes AI` inside a <strong> element at the end of the recipe and NOT at the beginning";
-  let prompt = `user instruction: generate a recipe of delicious food about ${instructionInput.value}`;
-  let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apikey}`;
-  
-  axios.get(apiUrl).then(displayRecipe);
+    "You are a romantic Poem expert and love to write short poems. Your mission is to generate a 4 line poem in the basic HTML and separate each line with a <br />. Make sure to follow the user instructions. Do not include a title to the poem. Sign the poem with 'SheCodes AI' inside a <strong> element at the end of the poem and NOT at the beginning";
+  let prompt = `User instructions: Generate a poem about ${instructionsInput.value}`;
+  let apiURL = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
+
+  axios.get(apiURL).then(displayPoem);
 }
-let recipeFormElement = document.querySelector("#recipe-generator");
-recipeFormElement.addEventListener("submit", generateRecipe);
+
+let poemFormElement = document.querySelector("#poem-generator-form");
+poemFormElement.addEventListener("submit", generatePoem);
